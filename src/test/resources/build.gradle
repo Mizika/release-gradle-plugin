@@ -1,0 +1,7 @@
+plugins {
+    id 'release-gradle-plugin'
+}
+
+tasks.create("showVersion") {
+    println "Project version = ${project.version}"
+}

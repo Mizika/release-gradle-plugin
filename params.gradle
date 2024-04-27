@@ -1,0 +1,21 @@
+String getParam(String name, String altName = null, String defaultValue = null) {
+    def alt = altName ?: name.replace('.', '_').toUpperCase()
+    def value = findProperty(name)
+    if (value != null) {
+        return value
+    }
+    value = findProperty(alt)
+    if (value != null) {
+        return value
+    }
+    value = System.getenv(name)
+    if (value != null) {
+        return value
+    }
+    value = System.getenv(alt)
+    return value
+}
+
+project.ext.getParam = { String name, String altName = null, String defaultValue = null ->
+    return getParam(name, altName, defaultValue)
+}
